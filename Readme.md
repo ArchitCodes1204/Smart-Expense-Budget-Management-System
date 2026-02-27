@@ -63,21 +63,21 @@ Contains the core application logic including:
 3. Data Layer
 Handles data storage and retrieval using MongoDB (or Local Storage for simplified implementation).
 
-⸻
+
 
 🧩 Design Principles Applied
 	•	Object-Oriented Programming (Encapsulation, Abstraction, Inheritance, Polymorphism)
 	•	SOLID Principles for maintainable and flexible code
 	•	Modular System Design for scalability
 
-⸻
+
 
 🎯 Design Patterns Used
 	•	Factory Pattern → Dynamic creation of Expense objects
 	•	Observer Pattern → Budget alerts and notifications
 	•	Strategy Pattern → Flexible report calculation logic
 
-⸻
+
 
 👥 Team Members & Contributions
 
