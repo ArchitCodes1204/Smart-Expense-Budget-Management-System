@@ -1,6 +1,6 @@
 Smart Expense & Budget Management System
 
-📌 Project Overview
+ Project Overview
 
 The Smart Expense & Budget Management System is a TypeScript-based application designed to help users efficiently manage personal finances. The system enables users to record expenses, categorize transactions, define budget limits, and analyze spending patterns.
 
