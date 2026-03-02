@@ -30,7 +30,7 @@ npm install
 
 Ensure that Node.js and npm are installed on your system before running the above commands.
 
-🚀 How to Run the Project
+ How to Run the Project
 
 After completing the installation steps, start the application by running:
 
