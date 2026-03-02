@@ -65,7 +65,7 @@ Handles data storage and retrieval using MongoDB (or Local Storage for simplifie
 
 
 
-🧩 Design Principles Applied
+ Design Principles Applied
 	•	Object-Oriented Programming (Encapsulation, Abstraction, Inheritance, Polymorphism)
 	•	SOLID Principles for maintainable and flexible code
 	•	Modular System Design for scalability
