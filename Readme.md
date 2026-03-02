@@ -6,7 +6,7 @@ The Smart Expense & Budget Management System is a TypeScript-based application d
 
 This project emphasizes the application of System Design principles, Object-Oriented Programming concepts, SOLID principles, and Design Patterns to ensure a scalable, modular, and maintainable architecture.
 
-🛠 Tech Stack
+ Tech Stack
 	•	Language: TypeScript
 	•	Frontend: React
 	•	Backend: Node.js, Express
