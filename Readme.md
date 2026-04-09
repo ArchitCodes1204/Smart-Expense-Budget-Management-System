@@ -1,6 +1,6 @@
 # Smart Expense & Budget Management System
 
-TypeScript monorepo for a SaaS-style personal finance platform with budgeting, expense tracking, reporting, notifications, and user-isolated data.
+TypeScript monorepo for personal finance management with budgeting, expense tracking, reports, notifications, and user-isolated data.
 
 ## Design Progress Checklist
 
