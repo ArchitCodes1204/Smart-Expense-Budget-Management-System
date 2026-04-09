@@ -65,6 +65,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Spinner } from "@/components/ui/spinner";
 import { ExpensePaymentMethod } from "@workspace/api-client-react";
+import { usePreferences } from "@/hooks/use-preferences";
 
 const expenseSchema = z.object({
   amount: z.coerce.number().positive("Amount must be positive"),
@@ -78,6 +79,7 @@ const expenseSchema = z.object({
 type ExpenseFormValues = z.infer<typeof expenseSchema>;
 
 export default function Expenses() {
+  const { formatCurrency } = usePreferences();
   const { user } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -363,7 +365,7 @@ export default function Expenses() {
                     {expense.paymentMethod.replace("_", " ")}
                   </TableCell>
                   <TableCell className="text-right font-medium">
-                    ${expense.amount.toFixed(2)}
+                    {formatCurrency(expense.amount)}
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center justify-end gap-2">

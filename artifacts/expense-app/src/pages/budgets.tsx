@@ -56,6 +56,7 @@ import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
 import { Spinner } from "@/components/ui/spinner";
 import { BudgetPeriod, CreateBudgetBodyPeriod, UpdateBudgetBodyPeriod } from "@workspace/api-client-react";
+import { usePreferences } from "@/hooks/use-preferences";
 
 const budgetSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -68,6 +69,7 @@ const budgetSchema = z.object({
 type BudgetFormValues = z.infer<typeof budgetSchema>;
 
 export default function Budgets() {
+  const { formatCurrency } = usePreferences();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   
@@ -307,8 +309,8 @@ export default function Budgets() {
               <CardContent className="flex-1 flex flex-col justify-end mt-4">
                 <div className="flex items-end justify-between mb-2">
                   <div>
-                    <span className="text-2xl font-bold">${budget.spent.toFixed(2)}</span>
-                    <span className="text-muted-foreground text-sm ml-1">/ ${budget.limit.toFixed(2)}</span>
+                    <span className="text-2xl font-bold">{formatCurrency(budget.spent)}</span>
+                    <span className="text-muted-foreground text-sm ml-1">/ {formatCurrency(budget.limit)}</span>
                   </div>
                   <span className={`text-sm font-medium ${isOver ? "text-destructive" : isWarning ? "text-amber-500" : "text-muted-foreground"}`}>
                     {budget.percentUsed.toFixed(1)}%
@@ -319,7 +321,7 @@ export default function Budgets() {
                   className={`h-2 ${isOver ? "[&>div]:bg-destructive" : isWarning ? "[&>div]:bg-amber-500" : "[&>div]:bg-primary"}`}
                 />
                 <div className="mt-4 text-xs text-muted-foreground flex justify-between">
-                  <span>Remaining: ${(budget.remaining < 0 ? 0 : budget.remaining).toFixed(2)}</span>
+                  <span>Remaining: {formatCurrency(budget.remaining < 0 ? 0 : budget.remaining)}</span>
                   <span>{isOver ? "Over budget" : "On track"}</span>
                 </div>
               </CardContent>

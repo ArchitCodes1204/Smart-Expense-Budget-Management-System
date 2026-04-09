@@ -7,6 +7,12 @@ import { CreateBudgetBody, UpdateBudgetBody, GetBudgetParams, UpdateBudgetParams
 
 const router: IRouter = Router();
 
+function toDateOrNull(value: string | null | undefined): Date | null | undefined {
+  if (value === undefined) return undefined;
+  if (value === null) return null;
+  return new Date(value);
+}
+
 async function getBudgetWithSpent(budget: typeof budgetsTable.$inferSelect) {
   const spentResult = await db
     .select({ total: sum(expensesTable.amount) })
@@ -35,7 +41,12 @@ router.post("/budgets", authMiddleware, async (req, res): Promise<void> => {
 
   const [budget] = await db
     .insert(budgetsTable)
-    .values({ ...parsed.data, userId: req.user!.userId })
+    .values({
+      ...parsed.data,
+      startDate: new Date(parsed.data.startDate),
+      endDate: toDateOrNull(parsed.data.endDate),
+      userId: req.user!.userId,
+    })
     .returning();
 
   res.status(201).json(budget);
@@ -76,7 +87,10 @@ router.patch("/budgets/:id", authMiddleware, async (req, res): Promise<void> => 
 
   const [budget] = await db
     .update(budgetsTable)
-    .set(parsed.data)
+    .set({
+      ...parsed.data,
+      endDate: toDateOrNull(parsed.data.endDate),
+    })
     .where(and(eq(budgetsTable.id, params.data.id), eq(budgetsTable.userId, req.user!.userId)))
     .returning();
 

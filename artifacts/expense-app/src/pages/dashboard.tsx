@@ -21,12 +21,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress";
 import { Spinner } from "@/components/ui/spinner";
 import { Wallet, TrendingUp, PieChart as PieChartIcon, Bell } from "lucide-react";
-
-function formatCurrency(amount: number) {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
-}
+import { usePreferences } from "@/hooks/use-preferences";
 
 export default function Dashboard() {
+  const { formatCurrency } = usePreferences();
   const currentMonth = format(new Date(), "yyyy-MM");
   
   const { data: summary, isLoading: isLoadingSummary } = useGetDashboardSummary();
@@ -127,7 +125,7 @@ export default function Dashboard() {
                     fontSize={12}
                     tickLine={false}
                     axisLine={false}
-                    tickFormatter={(value) => `$${value}`}
+                    tickFormatter={(value) => formatCurrency(Number(value))}
                   />
                   <RechartsTooltip 
                     formatter={(value: number) => [formatCurrency(value), "Spent"]}

@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/hooks/use-auth";
 import NotFound from "@/pages/not-found";
+import Landing from "@/pages/landing";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
 import Dashboard from "@/pages/dashboard";
@@ -14,6 +15,7 @@ import Categories from "@/pages/categories";
 import Reports from "@/pages/reports";
 import Notifications from "@/pages/notifications";
 import { AppLayout } from "@/components/layout/AppLayout";
+import { PreferencesProvider } from "@/hooks/use-preferences";
 
 const queryClient = new QueryClient();
 
@@ -35,7 +37,8 @@ function PublicRoute({ component: Component }: { component: React.ComponentType 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={() => <PublicRoute component={Login} />} />
+      <Route path="/" component={Landing} />
+      <Route path="/login" component={() => <PublicRoute component={Login} />} />
       <Route path="/register" component={() => <PublicRoute component={Register} />} />
       
       <Route path="/dashboard">
@@ -69,9 +72,11 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <AuthProvider>
-            <Router />
-          </AuthProvider>
+          <PreferencesProvider>
+            <AuthProvider>
+              <Router />
+            </AuthProvider>
+          </PreferencesProvider>
         </WouterRouter>
         <Toaster />
       </TooltipProvider>

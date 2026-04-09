@@ -53,7 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (err: any) {
       toast({
         title: "Login failed",
-        description: err?.data?.error || "Invalid credentials",
+        description: err?.data?.error || err?.data?.message || "Invalid credentials",
         variant: "destructive"
       });
       throw err;
@@ -69,7 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (err: any) {
       toast({
         title: "Registration failed",
-        description: err?.data?.error || "Could not create account",
+        description: err?.data?.error || err?.data?.message || "Could not create account",
         variant: "destructive"
       });
       throw err;

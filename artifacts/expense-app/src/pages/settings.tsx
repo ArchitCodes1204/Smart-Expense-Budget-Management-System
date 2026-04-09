@@ -18,6 +18,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Spinner } from "@/components/ui/spinner";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SUPPORTED_CURRENCIES, type CurrencyCode, usePreferences } from "@/hooks/use-preferences";
 
 const profileSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -28,6 +30,7 @@ const profileSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileSchema>;
 
 export default function Settings() {
+  const { currency, setCurrency } = usePreferences();
   const { user } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -135,6 +138,30 @@ export default function Settings() {
               </Button>
             </form>
           </Form>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Display Preferences</CardTitle>
+          <CardDescription>Choose how monetary values are shown across dashboards and reports.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <div className="space-y-2">
+            <label className="text-sm font-medium leading-none">Currency</label>
+            <Select value={currency} onValueChange={(value) => setCurrency(value as CurrencyCode)}>
+              <SelectTrigger className="w-[220px]">
+                <SelectValue placeholder="Select currency" />
+              </SelectTrigger>
+              <SelectContent>
+                {SUPPORTED_CURRENCIES.map((code) => (
+                  <SelectItem key={code} value={code}>
+                    {code === "INR" ? "INR (Indian Rupee)" : "USD (US Dollar)"}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </CardContent>
       </Card>
     </div>

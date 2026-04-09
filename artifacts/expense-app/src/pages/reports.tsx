@@ -62,6 +62,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { usePreferences } from "@/hooks/use-preferences";
 
 const reportSchema = z.object({
   type: z.nativeEnum(GenerateReportBodyType),
@@ -70,11 +71,8 @@ const reportSchema = z.object({
 
 type ReportFormValues = z.infer<typeof reportSchema>;
 
-function formatCurrency(amount: number) {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
-}
-
 export default function Reports() {
+  const { formatCurrency } = usePreferences();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   
@@ -300,7 +298,7 @@ export default function Reports() {
                             fontSize={12}
                             tickLine={false}
                             axisLine={false}
-                            tickFormatter={(value) => `$${value}`}
+                            tickFormatter={(value) => formatCurrency(Number(value))}
                           />
                           <RechartsTooltip 
                             formatter={(value: number) => [formatCurrency(value), "Spent"]}
