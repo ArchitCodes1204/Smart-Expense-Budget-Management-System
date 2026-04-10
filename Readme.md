@@ -59,9 +59,10 @@ Cardinality summary:
 - Budget (1) -> (M) Expense
 - Transaction (1) -> (0..1) Expense (implementation may also model inverse ownership)
 
-### Mermaid ER Diagram
+###ER Diagram
+<img width="1600" height="999" alt="image" src="https://github.com/user-attachments/assets/abdcaaee-3888-44b6-a299-5b32e18f4c4a" />
 
-```mermaid
+```
 erDiagram
     USER ||--o{ BUDGET : has
     USER ||--o{ CATEGORY : has
@@ -162,3 +163,5 @@ erDiagram
 - API errors are normalized to JSON for better frontend diagnostics.
 - Frontend API base URL is configurable via `VITE_API_BASE_URL`.
 - Currency preferences now support both **USD** and **INR (Indian Rupee)** from Settings.
+
+  
