@@ -6,6 +6,15 @@ import { logger } from "./lib/logger";
 
 const app: Express = express();
 
+const allowedOrigins = [
+  process.env["APP_ORIGIN"],
+  process.env["APP_ORIGIN"]?.replace(/\/$/, ""),
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "http://127.0.0.1:3000",
+  "http://127.0.0.1:3001",
+].filter((value): value is string => Boolean(value));
+
 app.use(
   pinoHttp({
     logger,
@@ -27,7 +36,13 @@ app.use(
 );
 const corsOptions = {
   origin: function (origin: string | undefined, callback: any) {
-    if (!origin || origin.includes('localhost:300')) {
+    if (!origin) {
+      callback(null, true);
+      return;
+    }
+
+    const normalizedOrigin = origin.replace(/\/$/, "");
+    if (allowedOrigins.includes(normalizedOrigin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
