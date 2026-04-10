@@ -162,3 +162,5 @@ erDiagram
 - API errors are normalized to JSON for better frontend diagnostics.
 - Frontend API base URL is configurable via `VITE_API_BASE_URL`.
 - Currency preferences now support both **USD** and **INR (Indian Rupee)** from Settings.
+
+  
