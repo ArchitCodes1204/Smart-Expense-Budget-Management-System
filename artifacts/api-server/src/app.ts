@@ -25,13 +25,18 @@ app.use(
     },
   }),
 );
-const allowedOrigin = process.env["APP_ORIGIN"] ?? "http://localhost:3000";
-app.use(
-  cors({
-    origin: allowedOrigin,
-    credentials: true,
-  }),
-);
+const corsOptions = {
+  origin: function (origin: string | undefined, callback: any) {
+    if (!origin || origin.includes('localhost:300')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
