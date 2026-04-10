@@ -59,7 +59,7 @@ Cardinality summary:
 - Budget (1) -> (M) Expense
 - Transaction (1) -> (0..1) Expense (implementation may also model inverse ownership)
 
-### Mermaid ER Diagram
+###ER Diagram
 <img width="1600" height="999" alt="image" src="https://github.com/user-attachments/assets/abdcaaee-3888-44b6-a299-5b32e18f4c4a" />
 
 ```
