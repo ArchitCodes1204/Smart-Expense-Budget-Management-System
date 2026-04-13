@@ -1,4 +1,4 @@
-# Smart Expense & Budget Management System
+# Smart Expense & Budget Management System f
 
 TypeScript monorepo for personal finance management with budgeting, expense tracking, reports, notifications, and user-isolated data.
 
