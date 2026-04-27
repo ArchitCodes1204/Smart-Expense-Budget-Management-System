@@ -11,15 +11,6 @@ const __dirname = path.dirname(__filename);
 
 const app: Express = express();
 
-const allowedOrigins = [
-  process.env["APP_ORIGIN"],
-  process.env["APP_ORIGIN"]?.replace(/\/$/, ""),
-  "http://localhost:3000",
-  "http://localhost:3001",
-  "http://127.0.0.1:3000",
-  "http://127.0.0.1:3001",
-].filter((value): value is string => Boolean(value));
-
 app.use(
   pinoHttp({
     logger,
@@ -39,22 +30,6 @@ app.use(
     },
   }),
 );
-const corsOptions = {
-  origin: function (origin: string | undefined, callback: any) {
-    if (!origin) {
-      callback(null, true);
-      return;
-    }
-
-    const normalizedOrigin = origin.replace(/\/$/, "");
-    if (allowedOrigins.includes(normalizedOrigin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-};
 
 // Serve static frontend files
 const frontendDistPath = path.resolve(__dirname, "../../expense-app/dist/public");
@@ -67,11 +42,13 @@ app.use((req, res, next) => {
   res.sendFile(path.join(frontendDistPath, "index.html"));
 });
 
-app.use(cors(corsOptions));
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", router);app.use((err: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+app.use("/api", router);
+
+app.use((err: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   logger.error({ err }, "Unhandled API error");
   const errorText = String(err);
   const cause = (err as { cause?: unknown } | null)?.cause;
