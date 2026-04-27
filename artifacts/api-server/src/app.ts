@@ -63,7 +63,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", router);
 
 // Serve static frontend files
-const frontendDistPath = path.resolve(__dirname, "../../expense-app/dist");
+const frontendDistPath = path.resolve(__dirname, "../../expense-app/dist/public");
 app.use(express.static(frontendDistPath));
 
 app.use((req, res, next) => {
