@@ -56,12 +56,6 @@ const corsOptions = {
   credentials: true,
 };
 
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.use("/api", router);
-
 // Serve static frontend files
 const frontendDistPath = path.resolve(__dirname, "../../expense-app/dist/public");
 app.use(express.static(frontendDistPath));
@@ -73,7 +67,11 @@ app.use((req, res, next) => {
   res.sendFile(path.join(frontendDistPath, "index.html"));
 });
 
-app.use((err: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api", router);app.use((err: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   logger.error({ err }, "Unhandled API error");
   const errorText = String(err);
   const cause = (err as { cause?: unknown } | null)?.cause;
