@@ -32,7 +32,7 @@ app.use(
 );
 
 // Serve static frontend files
-const frontendDistPath = path.resolve(__dirname, "../../expense-app/dist/public");
+const frontendDistPath = path.resolve(__dirname, "../../expense-app/dist");
 app.use(express.static(frontendDistPath));
 
 app.use((req, res, next) => {

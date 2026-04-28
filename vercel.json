@@ -1,5 +1,5 @@
 {
-  "outputDirectory": "artifacts/expense-app/dist/public",
+  "outputDirectory": "artifacts/expense-app/dist",
   "installCommand": "pnpm install",
   "buildCommand": "pnpm run build"
 }
