@@ -3,7 +3,7 @@
 A full-stack, production-grade personal finance application for tracking expenses, managing budgets, generating reports, and receiving automated alerts. Built with React, Node.js, Express, PostgreSQL, and Drizzle ORM inside a TypeScript PNPM monorepo. Implements JWT authentication, Repository pattern, Observer pattern, Strategy pattern, and SOLID principles throughout.
 
 ---
-# Hosted Link- https://smart-expense-budget-management-system-weop.onrender.com/
+**Hosted Link- https://smart-expense-budget-management-system-weop.onrender.com/
 
 
 **Full Documentation:** [https://drive.google.com/drive/folders/1tk2u_1PCYppCrecRbUt5IQTJrSuBRCza?usp=sharing](https://drive.google.com/drive/folders/1tk2u_1PCYppCrecRbUt5IQTJrSuBRCza?usp=sharing)
