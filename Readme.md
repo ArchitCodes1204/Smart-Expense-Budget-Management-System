@@ -186,6 +186,7 @@ DATABASE_URL=... corepack pnpm --filter @workspace/db run push
 ```
 
 ### 5. Start the services
+n
 
 **API Server** (runs at `http://localhost:4001`):
 ```bash
